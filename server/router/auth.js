@@ -5,6 +5,8 @@ const db= require('../db/conn')
 const User = require('../model/userSchema')
 const jwt = require('jsonwebtoken')
 const loginuser= require('../middleware/loginuser')
+const cookieParser =require("cookie-parser");
+router.use(cookieParser())
 
 router.get('/',(req,res)=>{
     res.send("Hello world from the Express Router Server")
@@ -52,7 +54,7 @@ router.post('/register',async (req,res)=>{
             //middleware to use pre / post function on 'save' event function defined in userSchema
             const userRegisterData=await user.save()
             if(userRegisterData){
-                res.status(201).json({message:"user registered successfully"})
+                res.status(201).json({success:"user registered successfully"})
             }
         }
         
@@ -63,7 +65,7 @@ router.post('/register',async (req,res)=>{
 
 //login Route
 
-router.post('/signin',async (req,res)=>{
+router.post('/login',async (req,res)=>{
     try{   
         const {email,password}= req.body
         if(!email || !password){
@@ -83,7 +85,7 @@ router.post('/signin',async (req,res)=>{
                     httpOnly:true
                 })
 
-                res.json({message:"user signin successfully",AuthToken})
+                res.json({success:"user signin successfully",AuthToken})
             }else{
                 res.status(400).json({error:"Invalid Credentials"})
             } 
@@ -99,9 +101,9 @@ router.post('/signin',async (req,res)=>{
 })
 
 
-//getUser Details
+//getUser Details for about page
 
-router.post('/getuser',loginuser,async(req,res)=>{
+router.get('/getuser',loginuser,async(req,res)=>{
     try {
         let userId= req.user._id
         const user = await User.findById(userId).select("-password")

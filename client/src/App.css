@@ -1,38 +1,89 @@
-/* .App {
-  text-align: center;
+body{
+  overflow: hidden;
+}
+.input-field {
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input-field i {
+  position: absolute;
+  top: 35px;
+  left: 15px;
+  font-size: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input-field input {
+  padding-left: 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.signup-image{
+  height: 400px;
+  width: 500px;
 }
-
-.App-link {
-  color: #61dafb;
+.signup-image a{
+  
+  text-decoration: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signin-image{
+  height: 400px;
+  width: 500px;
+}
+.signin-image a{
+  
+  text-decoration: none;
+}
+.home-page{
+    height: 100vh;
+    background: linear-gradient(90deg,deepskyblue 50%, aliceblue 50%);
+    
+}
+.tab-content label{
+  font-weight: bold;
+}
+.tab-content p {
+  color: #318e9d;
+}
+.profile-work a{
+  text-decoration: none;
+  color: #9a9f96;
+}
+.profile_ready{
+  color: #318e9d;
+}
+.profile_head p {
+  font-size: medium;
+}
+/* 
+.not-found{
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.not-found-404{
+  font-size:150px;
+  opacity: 0.2;
+  font-weight: bold;
 } */
+.not-found {
+  position:fixed;
+ bottom:250px;
+ right:450px;
+ z-index:99;
+ color:black;
+ text-align: center;
+}
+.not-found-text1{
+ opacity:0.4;
+}
+.not-found a{
+  text-decoration: none;
+}
+.not-found-404{
+  font-size: 150px;
+  opacity:0.4;
+}
+.not-found h2{
+ font-weight: bold;
+ text-transform:uppercase;
+}
