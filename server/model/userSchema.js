@@ -26,6 +26,19 @@ const userSchema = new mongoose.Schema({
     cpassword:{
         type:String,
         required:true
+    },
+    messages:[
+        {
+            message:
+            {
+                type:String,
+                required:true    
+            }
+        }
+    ],
+    date:{
+        type:Date,
+        default:Date.now
     }
     
 })
@@ -48,6 +61,17 @@ userSchema.methods.generateAuthToken = async function(){
         return token
     }catch(err){
         console.log(err)
+    }
+}
+
+// adding message to db
+userSchema.methods.addMessage= async function(message){
+    try {
+        this.messages = this.messages.concat({message})
+        await this.save()
+        return this.messages   
+    } catch (error) {
+        console.log(error)
     }
 }
 

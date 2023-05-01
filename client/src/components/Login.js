@@ -1,8 +1,11 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import loginpic from '../images/login.png'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../App'
+
 const Login = () => {
+  const {dispatch}=useContext(UserContext)
   const [email,setEmail] = useState('')
   const [password,setPassword]= useState('')
   const navigate=useNavigate()
@@ -21,6 +24,7 @@ const Login = () => {
     const data = await res.json()
 
     if(data.success){
+      dispatch({type:'USER',payload:true})
       window.alert('Login successfull')
       navigate('/')
     }else{

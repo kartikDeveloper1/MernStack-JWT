@@ -12,30 +12,6 @@ router.get('/',(req,res)=>{
     res.send("Hello world from the Express Router Server")
 })
 
-//using promises
-// router.post('/register',(req,res)=>{
-//     const {name,email,phone,work,password,cpassword} = req.body
-//     if( !name || !email || !phone || !work || !password || !cpassword){
-//         return res.status(422).json({error:'All fields are mandatory'})
-//     }
-
-//     User.findOne({email:email})
-//     .then((userExist)=>{
-//         if(userExist){
-//             return res.status(422).json({error:'Email Already Exist !!'})
-//         }
-//         const user = new User({name,email,phone,work,password,cpassword})
-
-//         user.save().then(()=>{
-//             res.status(201).json({message:"user registered successfully"})
-//         }).catch((err)=>{
-//             res.status(500).json({error:"failed to register"})
-//         })
-
-//     }).catch(err => {console.log(err)})
-
-// })
-
 
 // using Async Await 
 router.post('/register',async (req,res)=>{
@@ -101,16 +77,39 @@ router.post('/login',async (req,res)=>{
 })
 
 
-//getUser Details for about page
+//getUser Details for about page and contact page
 
 router.get('/getuser',loginuser,async(req,res)=>{
+    res.send(req.rootUser)
+})
+
+
+
+// contact page form submit url route
+router.post('/contact',loginuser,async(req,res)=>{
     try {
-        let userId= req.user._id
-        const user = await User.findById(userId).select("-password")
-        res.send(user)
+        const {name,email,phone,message} = req.body
+        if(!name || !email || !phone || !message){
+            return res.json({error:"Please fill the contact form"})
+        }else{
+            let userId= req.user._id
+            const user = await User.findById(userId).select("-password")
+            if(user){
+                const userMessage=await user.addMessage(message)
+                await user.save()
+                res.status(200).json({success:"Message sent successfully"})
+            }
+        }
+
     } catch (error) {
         console.log(error)
     }
+})
+
+//logout functionality
+router.get('/logout',(req,res)=>{
+    res.clearCookie('jwtToken',{path:'/'})
+    res.status(200).send('logout')
 })
 
 module.exports = router

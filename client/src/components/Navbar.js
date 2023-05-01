@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import logo from '../images/logob4New.png';
+import { UserContext } from '../App'
 const Navbar = () => {
+    const {state}=useContext(UserContext)
   return (
     <>
         <nav className="navbar navbar-expand-lg background-theme navbar-light bg-light" >
@@ -23,12 +25,23 @@ const Navbar = () => {
                         <li className="nav-item">
                         <NavLink className="nav-link active" to={'/contact'} >Contact</NavLink>
                         </li>
-                        <li className="nav-item">
-                        <NavLink className="nav-link active" to={'/login'} >Login</NavLink>
-                        </li>
-                        <li className="nav-item ">
-                        <NavLink className="nav-link active" to={'/signup'} >Registration</NavLink>
-                        </li>
+                        {!state?
+                            <>
+                                <li className="nav-item">
+                                <NavLink className="nav-link active" to={'/login'} >Login</NavLink>
+                                </li>
+                                <li className="nav-item ">
+                                <NavLink className="nav-link active" to={'/signup'} >Register</NavLink>
+                                </li>
+                            </>:
+                            <>
+                                <li className="nav-item ">
+                                <NavLink className="nav-link active" to={'/logout'} >Logout</NavLink>
+                                </li>
+                            </>
+                        }
+                        
+                        
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-body{
+/* body{
   overflow: hidden;
-}
+} */
 .input-field {
   position: relative;
 }
@@ -53,22 +53,10 @@ body{
 .profile_head p {
   font-size: medium;
 }
-/* 
-.not-found{
-    height: 100vh;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
-.not-found-404{
-  font-size:150px;
-  opacity: 0.2;
-  font-weight: bold;
-} */
 .not-found {
-  position:fixed;
+  /* position:relative; */
  bottom:250px;
- right:450px;
+ right:400px;
  z-index:99;
  color:black;
  text-align: center;
@@ -86,4 +74,14 @@ body{
 .not-found h2{
  font-weight: bold;
  text-transform:uppercase;
+}
+.home-page-title1{
+  font-size:30px;
+}
+.home-page-title2{
+  font-size:40px;
+}
+.home-page-name{
+  font-size: 16px;
+  text-transform: uppercase;
 }

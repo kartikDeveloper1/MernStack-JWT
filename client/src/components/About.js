@@ -20,9 +20,14 @@ const About = () => {
         })
   
         const data = await res.json()
-        setUserData(data)
+        if(data.error){
+          const error = new Error(res.error)
+          throw error
+        }else{
+          setUserData(data)
+        }
       } catch (error) {
-        navigate('/login')
+         navigate('/login')
       }
   }
   return (

@@ -2,11 +2,13 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 const Contact = () => {
-  const[userData,setUserData] = useState([])
+  const[userData,setUserData] = useState({name:"",email:"",phone:"",message:""})
   const navigate= useNavigate()
+
   useEffect(()=>{
     userContact()
   },[])
+  
 
   const userContact=async()=>{
       try {
@@ -20,10 +22,45 @@ const Contact = () => {
         })
   
         const data = await res.json()
-        setUserData(data)
+        if(data.error){
+          const error = new Error(res.error)
+          throw error
+        }else{
+          setUserData({
+            ...userData,name:data.name,email:data.email,phone:data.phone
+          })
+        }
+        
       } catch (error) {
         navigate('/login')
       }
+  }
+  
+  // we are storing data in state
+  const handleInputs=(e)=>{
+      setUserData({
+        ...userData,[e.target.name]:e.target.value
+      })
+  }
+
+  // send data to database
+  const sendMessage=async(e)=>{
+    e.preventDefault()
+    const {name,email,phone,message} = userData;
+    const res= await fetch('/contact',{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({name,email,phone,message})
+    })
+    const data =await res.json()
+    if(data.success){
+      alert('Message sent successfully')
+      setUserData({...userData,message:''})
+    }else{
+      alert('Fill All details')
+    }
   }
   return (
     <>
@@ -80,15 +117,15 @@ const Contact = () => {
                   </div>
                   <form id="contact-form">
                     <div className="contact_form_name d-flex justify-content-between ">
-                      <input className='form-control input-field ' type="text" value={userData.name} id="contact_name" placeholder='Your name' required={true} />
-                      <input className='form-control input-field mx-2' type="email" value={userData.email} id="contact_email" placeholder='Your email' required={true} />
-                      <input className='form-control input-field' type="number" value={userData.phone} id="contact_phone" placeholder='Your phone number' required={true} />
+                      <input name='name' readOnly className='form-control input-field ' onChange={handleInputs} type="text" value={userData.name} id="contact_name" placeholder='Your name' required={true} />
+                      <input name='email' readOnly className='form-control input-field mx-2' onChange={handleInputs} type="email" value={userData.email} id="contact_email" placeholder='Your email' required={true} />
+                      <input name='phone' readOnly className='form-control input-field' onChange={handleInputs} type="number" value={userData.phone} id="contact_phone" placeholder='Your phone number' required={true} />
                     </div>
                     <div className="contact-message-text mt-4">
-                      <textarea className="contact-form-message form-control" placeholder='message' cols="30" rows="5"></textarea>
+                      <textarea name='message' className="contact-form-message form-control" onChange={handleInputs} value={userData.message}  placeholder='message' cols="30" rows="5"></textarea>
                     </div>
                     <div className="contact_form_button mt-4">
-                        <button className='btn btn-primary form-control'  type='submit'>Send Message</button>
+                        <button onClick={sendMessage} className='btn btn-primary form-control'  type='submit'>Send Message</button>
                     </div>
                   </form>
                 </div>

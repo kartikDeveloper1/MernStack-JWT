@@ -7,10 +7,6 @@ const jwt = require('jsonwebtoken')
 //we require express to deal with backend and to use in our app we need to
 // assign it to app const to use its functionality(Mthods and properties)
 
-// app.use(cors({
-//     origin:"http://localhost:3000"
-// }))
-
 app.use(cors())
 
 dotenv.config({path:'./config.env'})
@@ -25,29 +21,11 @@ app.use(require("./router/auth"))
 const PORT=process.env.PORT
 
 
-
-
 /*
 Routes
 */
 app.get('/',(req,res)=>{
     res.send("Hello world from the Express Server")
-})
-
-// app.get('/about',middleware,(req,res)=>{
-//     res.send("about")
-// })
-
-app.get('/contact',(req,res)=>{
-    res.send("contact")
-})
-
-app.get('/signin',(req,res)=>{
-    res.send("signin")
-})
-
-app.get('/signup',(req,res)=>{
-    res.send("signup")
 })
 
 app.listen(PORT,()=>{

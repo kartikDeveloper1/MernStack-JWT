@@ -1,19 +1,24 @@
 // this middleware helps to authenticate logged in user on each routes
 const jwt = require('jsonwebtoken')
-
+const User = require('../model/userSchema')
 const loginuser=async (req,res,next)=>{
-    // const token = req.header('auth-token')
     
     try{
         const token = req.cookies.jwtToken
-        if(!token){
-            res.status(401).send({error:"please authenticate using a valid token"})
-        }    
-        const data= jwt.verify(token,process.env.SECRET_KEY)
-        req.user=data
+        const verifyToken= jwt.verify(token,process.env.SECRET_KEY)
+        const rootUser = await User.findOne({_id:verifyToken._id})
+        if(!rootUser){
+            throw new Error('user not found')    
+        }
+        req.token =token
+        req.rootUser= rootUser
+        req.userId= rootUser._id
+
+        
         next()
     }catch(err){
-        res.status(401).send({error:"not valid token"})
+        res.status(401).send({error:"unauthorised"})
+        // console.log(err)
     }
 }
 module.exports = loginuser
