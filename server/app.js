@@ -18,7 +18,7 @@ app.use(express.json()) //We need to tell our application to accept json data fo
 
 app.use(require("./router/auth"))
 
-const PORT=process.env.PORT
+const PORT=process.env.PORT || 5000
 
 
 /*
@@ -27,6 +27,12 @@ Routes
 app.get('/',(req,res)=>{
     res.send("Hello world from the Express Server")
 })
+
+// 3rd step heroku deployment
+if(process.env.NODE_ENV== "production"){
+    app.use(express.static('client/build'))
+}
+//
 
 app.listen(PORT,()=>{
     console.log("Now Server is Running at port number 5000")
