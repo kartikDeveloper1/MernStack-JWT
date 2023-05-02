@@ -20,7 +20,10 @@ app.use(require("./router/auth"))
 
 const PORT=process.env.PORT || 5000
 
-
+const corsOptions = {
+    origin: "https://bcreative-client.onrender.com/", // frontend URI (ReactJS)
+}
+app.use(cors(corsOptions));
 /*
 Routes
 */
