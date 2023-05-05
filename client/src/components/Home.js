@@ -5,7 +5,6 @@ const Home = () => {
 
   const[username,setUsername] = useState()
   const [show,setShow] = useState(false)
-
   useEffect(()=>{
     callHomePage()
   },[])

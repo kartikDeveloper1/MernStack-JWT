@@ -24,6 +24,7 @@ const Login = () => {
     const data = await res.json()
 
     if(data.success){
+      localStorage.setItem('jwtToken',data.AuthToken)
       dispatch({type:'USER',payload:true})
       window.alert('Login successfull')
       navigate('/')

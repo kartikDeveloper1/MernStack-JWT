@@ -1,6 +1,7 @@
 import React, { useEffect,useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../App'
+
 const Logout = () => {
     const navigate = useNavigate()
     const {dispatch}=useContext(UserContext)
@@ -18,6 +19,7 @@ const Logout = () => {
                 const error = new Error(res.error)
                 throw error
             }else{
+                localStorage.setItem('jwtToken','')
                 dispatch({type:"USER",payload:false})
                 navigate('/login',{replace:true})
             }

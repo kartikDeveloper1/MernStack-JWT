@@ -1,9 +1,7 @@
-import React,{useContext} from 'react'
+import React from 'react'
 import {NavLink} from 'react-router-dom'
 import logo from '../images/logob4New.png';
-import { UserContext } from '../App'
 const Navbar = () => {
-    const {state}=useContext(UserContext)
   return (
     <>
         <nav className="navbar navbar-expand-lg background-theme navbar-light bg-light" >
@@ -25,7 +23,7 @@ const Navbar = () => {
                         <li className="nav-item">
                         <NavLink className="nav-link active" to={'/contact'} >Contact</NavLink>
                         </li>
-                        {!state?
+                        {!localStorage.getItem('jwtToken')?
                             <>
                                 <li className="nav-item">
                                 <NavLink className="nav-link active" to={'/login'} >Login</NavLink>

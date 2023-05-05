@@ -6,6 +6,7 @@ const About = () => {
   const navigate= useNavigate()
   useEffect(()=>{
     callAboutPage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   const callAboutPage=async()=>{
