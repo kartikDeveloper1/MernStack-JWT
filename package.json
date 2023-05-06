@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build --prefix client",
+    "deploy": "gh-pages -d build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/kartikDeveloper1/MernStack-JWT/issues"
   },
-  "homepage": "https://github.com/kartikDeveloper1/MernStack-JWT#readme"
+  "homepage": "https://kartikDeveloper1.github.io/MernStack-JWT",
+  "dependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
