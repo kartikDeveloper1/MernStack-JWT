@@ -25,11 +25,11 @@ function App() {
     <Navbar/>
       <Routes>
         <Route exact path={'/'} element={<Home/>} />
-        <Route path={'/about'} element={<About/>} />
-        <Route path={'/contact'} element={<Contact/>} />
-        <Route path={'/login'} element={<Login/>} />
-        <Route path={'/signup'} element={<Signup/>} />
-        <Route path={'/logout'} element={<Logout/>} />
+        <Route exact path={'/about'} element={<About/>} />
+        <Route exact path={'/contact'} element={<Contact/>} />
+        <Route exact path={'/login'} element={<Login/>} />
+        <Route exact path={'/signup'} element={<Signup/>} />
+        <Route exact path={'/logout'} element={<Logout/>} />
         <Route path={'*'} element={<Errorpage/>} />
       </Routes>
       </UserContext.Provider>
