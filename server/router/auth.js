@@ -112,4 +112,12 @@ router.get('/logout',(req,res)=>{
     res.status(200).send('logout')
 })
 
+router.all('*', function(req, res, next){
+            res.header("Access-Control-Allow-Origin", "*")
+            res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+            res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept")
+            res.header("Access-Control-Max-Age", "1728000")
+            next();
+        });
+
 module.exports = router
