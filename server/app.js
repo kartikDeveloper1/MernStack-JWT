@@ -3,6 +3,8 @@ const mongoose= require('mongoose')
 const express = require('express')
 const app = express() 
 const jwt = require('jsonwebtoken')
+const cors=require('cors')
+app.use(cors)
 //we require express to deal with backend and to use in our app we need to
 // assign it to app const to use its functionality(Mthods and properties)
 
