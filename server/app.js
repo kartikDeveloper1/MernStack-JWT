@@ -10,7 +10,6 @@ dotenv.config({path:'./config.env'})
 
 //db connection
 require('./db/conn')
-// const User = require('./model/userSchema')
 app.use(express.json()) //We need to tell our application to accept json data format
 
 app.use(require("./router/auth"))
