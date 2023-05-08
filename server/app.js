@@ -25,7 +25,7 @@ app.get('/',(req,res)=>{
 
 // 3rd step heroku deployment
 if(process.env.NODE_ENV== "production"){
-    app.use(express.static('client/build'))
+    app.use(express.static('../client/build'))
 }
 //
 
