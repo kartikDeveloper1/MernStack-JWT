@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/kartikDeveloper1/MernStack-JWT/issues"
   },
-  "homepage": "https://kartikDeveloper1.github.io/MernStack-JWT",
+  "homepage": "https://kartikDeveloper1.github.io/MernStack-JWT/",
   "dependencies": {
     "gh-pages": "^5.0.0"
   }
